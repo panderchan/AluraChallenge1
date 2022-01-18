@@ -25,9 +25,35 @@ form{
     padding: 10px;
     text-align: center;
     display: block;
-   margin: 10px;
+    margin: 0 auto;
+    margin-bottom: 20px;
     background-color: #fff;
+    border-radius: 10px;
+    width: 500px;
+    padding: 30px;
 }
+
+.shakebox{
+    position: relative;
+animation-name: example;
+  animation-duration: 0.8s;
+  animation-iteration-count: 2;
+}
+
+  @keyframes example {
+  0%   { left:0px; top:0px;}
+  30%  {left:20px; top:0px;}
+  40%  {left:-20px; top:0px;}
+  50% {left:20px; top:0px;}
+  60%  {left:-20px; top:0px;}
+  100%  {left:0px; top:0px;}
+
+
+}
+
+
+
+
 
 textarea{
 
@@ -59,6 +85,19 @@ input[type=button]:hover{
 
 }
 
+span{
+    position:absolute;
+    text-align: 0;
+    background-color: red;
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    vertical-align:middle;
+    line-height: 30px;
+}
+span:hover{
+    cursor: pointer;
+}
 
 </style>
 
@@ -66,14 +105,14 @@ input[type=button]:hover{
 <body>
 <div id="container">
 <h1>Encriptador</h1>
-    <form>
-        <textarea id="entry"></textarea>
-
+    <form id="entrybox">
+        <textarea id="entry" autocomplete='off'></textarea>
+        <span id="clear" onClick="borrar()">X</span>
         <input type="button" value="Encriptar" id="encrypt">
         <input type="button" value="Desencriptar" id="desencrypt">
     </form>
     <form>
-        <textarea id="result"></textarea><br>
+        <textarea id="result" autocomplete='off'></textarea><br>
         <input type="button" id="copiar" value="Copiar mensaje">
     </form>
 
@@ -98,12 +137,15 @@ const copiame = document.querySelector("#copiar");
         var reemplazo = entrada.replace(/e/g, "enter").replace(/i/g, "imes").replace(/a/g, "ai").replace(/o/g, "ober").replace(/u/g, "ufat")
         console.log(reemplazo)
         document.querySelector("#result").value = reemplazo;
+        document.querySelector("#entrybox").classList.add("shakebox")
 
-    // La letra "e" es convertida para "enter"
-    // La letra "i" es convertida para "imes"
-    // La letra "a" es convertida para "ai"
-    //La letra "o" es convertida para "ober"
-    //La letra "u" es convertida para "ufat"
+        function removeClass(){
+            document.querySelector("#entrybox").classList.remove("shakebox")
+
+        }
+
+        window.setTimeout(removeClass, 2000)
+
     }
 
 
@@ -115,7 +157,14 @@ const copiame = document.querySelector("#copiar");
         var reemplazo = entrada.replace(/enter/g, "e").replace(/imes/g, "i").replace(/ai/g, "a").replace(/ober/g, "o").replace(/ufat/g, "u")
         console.log(reemplazo)
         document.querySelector("#result").value = reemplazo;
+        document.querySelector("#entrybox").classList.add("shakebox")
 
+        function removeClass(){
+        document.querySelector("#entrybox").classList.remove("shakebox")
+
+        }
+
+window.setTimeout(removeClass, 2000)
 
     // La letra "e" es convertida para "enter"
     // La letra "i" es convertida para "imes"
@@ -145,10 +194,19 @@ navigator.clipboard.writeText(salida.value);
 }
 
 
+function borrar(){
+    console.log(document.querySelector("#clear").innerText)
+    document.querySelector("#entry").value=""
+
+
+}
+
 
 encriptame.onclick = encriptar;
 desencriptame.onclick = desencriptar;
 copiame.onclick = copiar;
+
+
 
 </script>
 
