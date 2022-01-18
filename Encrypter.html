@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Challenge 1. Encriptador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet"> 
+<style>
+    body{
+        background-color: rgb(22, 22, 22);
+        color: white;
+        font-family: 'Courier Prime', monospace;
+    }
+#container{
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+ /*   border: white solid 2px;*/
+    width: 600px;
+}
+form{
+    padding: 10px;
+    text-align: center;
+    display: block;
+   margin: 10px;
+    background-color: #fff;
+}
+
+textarea{
+
+    width: 80%;
+    height: 60px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(240, 240, 240);
+    resize: none;
+}
+
+textarea:hover{
+    cursor: default;
+}
+
+input[type=button]{
+background-color: black;
+border-radius: 4px;
+padding: 10px;
+color:white;
+border: none;
+}
+
+input[type=button]:hover{
+    background-color: rgb(13, 76, 95);
+    cursor: help;
+
+}
+
+
+</style>
+
+</head>
+<body>
+<div id="container">
+<h1>Encriptador</h1>
+    <form>
+        <textarea id="entry"></textarea>
+
+        <input type="button" value="Encriptar" id="encrypt">
+        <input type="button" value="Desencriptar" id="desencrypt">
+    </form>
+    <form>
+        <textarea id="result"></textarea><br>
+        <input type="button" id="copiar" value="Copiar mensaje">
+    </form>
+
+<footer>
+    Este desafío fue desarrollado por Nieves Varela.
+</footer>
+</div>
+
+<script>
+//Campos
+
+//Botones
+const encriptame = document.querySelector("#encrypt");
+const desencriptame = document.querySelector("#desencrypt");
+const copiame = document.querySelector("#copiar");
+
+
+    function encriptar(){
+        var entrada = document.querySelector("#entry").value
+        console.log("El texto a encriptar es " + entrada)
+
+        var reemplazo = entrada.replace(/e/g, "enter").replace(/i/g, "imes").replace(/a/g, "ai").replace(/o/g, "ober").replace(/u/g, "ufat")
+        console.log(reemplazo)
+        document.querySelector("#result").value = reemplazo;
+
+    // La letra "e" es convertida para "enter"
+    // La letra "i" es convertida para "imes"
+    // La letra "a" es convertida para "ai"
+    //La letra "o" es convertida para "ober"
+    //La letra "u" es convertida para "ufat"
+    }
+
+
+
+    function desencriptar(){
+        var entrada = document.querySelector("#entry").value
+        console.log("El texto a desencriptar es " + entrada)
+
+        var reemplazo = entrada.replace(/enter/g, "e").replace(/imes/g, "i").replace(/ai/g, "a").replace(/ober/g, "o").replace(/ufat/g, "u")
+        console.log(reemplazo)
+        document.querySelector("#result").value = reemplazo;
+
+
+    // La letra "e" es convertida para "enter"
+    // La letra "i" es convertida para "imes"
+    // La letra "a" es convertida para "ai"
+    //La letra "o" es convertida para "ober"
+    //La letra "u" es convertida para "ufat"
+
+    }
+
+
+
+
+
+
+function copiar(){
+    var salida = document.querySelector("#result")
+    console.log("El texto a copiar es " + salida)
+
+/* Select the text field */
+salida.select();
+salida.setSelectionRange(0, 99999); /* For mobile devices */
+
+ /* Copy the text inside the text field */
+navigator.clipboard.writeText(salida.value);
+
+
+}
+
+
+
+encriptame.onclick = encriptar;
+desencriptame.onclick = desencriptar;
+copiame.onclick = copiar;
+
+</script>
+
+
+</body>
+</html>
